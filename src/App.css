@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+
 .App {
   text-align: center;
   height: 100vh;
@@ -8,6 +10,38 @@
   height: 40vmin;
   pointer-events: none;
 }
+
+a {
+  outline: none;
+  text-decoration: none;
+  color: rgb(206, 247, 250);
+}
+
+a:visited {
+  color: rgb(206, 247, 250);
+}
+
+a:hover,
+a:active {
+  color: rgb(244, 169, 7);
+}
+
+:focus {
+  outline: 1px dashed rgb(206, 247, 250);
+  outline-offset: 2px;
+}
+ /*
+    Remove default focus styles for mouse users ONLY if
+    :focus-visible is supported on this platform.
+  */
+  :focus:not(:focus-visible) {
+    outline: none;
+    outline-offset: 0px;
+  }
+  :focus-visible {
+    outline: 1px dashed rgb(206, 247, 250);
+    outline-offset: 2px;
+  }
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {

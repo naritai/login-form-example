@@ -1,10 +1,9 @@
 import './login.css';
 
 const LoginForm = () => {
-
   return (
     <div className="login-form__container">
-      {/* <div className="login-form__cover"></div> */}
+      <div className="login-form__caption">Sign in</div>
       <form className="login-form">
         <div className="login-form__field-group">
           <label className="login-form__label" htmlFor="email">Email</label>
@@ -26,8 +25,8 @@ const LoginForm = () => {
 
         <button className="btn submit-btn" type="submit">Sign in</button>
         <div className="register-wrapper">
-          New user ? 
-          <a className="register-link" href="/register">Sign up</a>
+          <span>New user ?</span>
+          <a className="register-link" href="/register">Register</a>
         </div>
       </form>
     </div>

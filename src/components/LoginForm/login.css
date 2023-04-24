@@ -1,3 +1,11 @@
+.login-form__caption {
+  font-family: 'Lobster', cursive;
+  font-size: 46px;
+  margin-bottom: 20px;
+  font-weight: bold;
+  color: rgb(244, 169, 7);
+}
+
 .login-form {
   display: flex;
   flex-direction: column;
@@ -6,7 +14,7 @@
   box-sizing: border-box;
   padding: 20px;
   background: rgba(0, 0, 0, 0.1);
-  box-shadow: 2px 2px 5px 5px rgba(0, 0, 0, 0.15);
+  box-shadow: 1px 1px 5px 5px rgba(0, 0, 0, 0.2);
   color: white;
 }
 
@@ -34,6 +42,12 @@
   outline: none;
   background: rgba(0, 0, 0, 0.05);
   border-bottom: 4px solid #484848;
+
+  transition: all 0.1s ease-in;
+}
+
+.login-form__text-field:focus {
+  border-bottom: 4px solid rgb(206, 247, 250);
 }
 
 .login-form__label {
@@ -45,11 +59,32 @@
   cursor: pointer;
 }
 
+.remember-me-label:hover .login-form__checkbox {
+  outline: none;
+}
+
 .login-form__checkbox {
   min-width: 20px;
   min-height: 20px;
   outline: none;
-  border: 1px solid #E86A33;
+  accent-color: rgba(11, 112, 154, 0.9);
+  margin-right: 5px;
+  cursor: pointer;
+}
+
+.login-form__checkbox:focus {
+  outline: 1px dashed rgb(206, 247, 250);
+  outline-offset: 2px;
+}
+
+.login-form__checkbox:focus:not(:focus-visible) {
+  outline: none;
+  outline-offset: 0px;
+}
+
+.login-form__checkbox:focus-visible {
+  outline: 1px dashed rgb(206, 247, 250);
+  outline-offset: 2px;
 }
 
 .forgot-password-link {
@@ -72,8 +107,21 @@
   margin-bottom: 15px;
   background-color: #484848;
   color: white;
+  transition: all 0.1s ease-in;
+}
+
+.submit-btn:hover,
+.submit-btn:focus {
+  color: rgba(78, 194, 244, 0.9);
+  background-color: #565656;
+  border-color: #565656;
 }
 
 .register-wrapper {
   font-size: 0.8em;
+}
+
+.register-wrapper span {
+  display: inline-block;
+  margin-right: 5px;
 }
