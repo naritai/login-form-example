@@ -1,3 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+
+html {
+  height: 100vh;
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -5,9 +11,60 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  height: 100%;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+
+a {
+  outline: none;
+  text-decoration: none;
+  color: rgb(206, 247, 250);
+}
+
+a:visited {
+  color: rgb(206, 247, 250);
+}
+
+a:hover,
+a:active {
+  color: rgb(244, 169, 7);
+}
+
+:focus {
+  outline: 1px dashed rgb(206, 247, 250);
+  outline-offset: 2px;
+}
+/*
+  Remove default focus styles for mouse users ONLY if
+  :focus-visible is supported on this platform.
+*/
+:focus:not(:focus-visible) {
+  outline: none;
+  outline-offset: 0px;
+}
+:focus-visible {
+  outline: 1px dashed rgb(206, 247, 250);
+  outline-offset: 2px;
+}
+
+.offscreen {
+  position: absolute;
+
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  border: 0;
+  padding: 0;
+
+  white-space: nowrap;
+
+  clip-path: inset(100%);
+  clip: rect(0 0 0 0);
+  overflow: hidden;
 }

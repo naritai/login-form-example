@@ -1,28 +1,12 @@
+1. Separate network error from other errors (not fill inputs with red color)
+2. Add React Router
+3. Add React Context + redirect with React Router
+4. DONE: Implement Show/Hide button + Caps lock Icon
+5. DONE:  Fill caret with certain color
+6. Refactoring
+7. Learn why StrictMode
 
-0. Make basic form UI
--- create all the inputs, checkboxes, etc elements
--- write basic styles for them
 
-1. make the logic of the form clear and correct
--- state + focus + autocomplete
--- errors + showing errors
--- submit form: mouse, touch, keyboard
-
-2. Make structure and styles OK
--- folders/files structure + names
--- global styles
-
-3. Make additional features
--- cheack CAPSLOCK for desktops
--- show/hide password
--- use browser APIS: localstorage + federated...
--- aria attributes
--- remember me checkbox
-
-4. Refactoring
--- add routes
--- make reusable components
--- add validation of (email)
-
-5. Styles best practices + finish
--- media queries + best practices
+8. Security best practices
+-- disable dev tools fvilers/disable-dev-tools
+-- don't save password in AuthContext (save username + AccessToken)
