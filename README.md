@@ -9,6 +9,7 @@ You can run project locally:
 ### `npm start`
 
 ## Demo (screenshots)
-![demo1](https://raw.githubusercontent.com/naritai/login-form-example/public/screens/screen1.png)
 
-![demo2](https://raw.githubusercontent.com/naritai/login-form-example/public/screens/screen2.png)
+![Form general](/public/screens/screen1.png?raw=true "Form general")
+
+![Form failure](/public/screens/screen2.png?raw=true "Form failure")
