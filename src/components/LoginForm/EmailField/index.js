@@ -1,5 +1,6 @@
 import { forwardRef  } from "react";
-import { ControlledInput } from "../../ControlledInput"
+import { ControlledInput } from "../../ControlledInput";
+import './EmailFieldStyles.css';
 
 const EmailField = forwardRef((props, ref) => {
   const { type, value, ...rest } = props;

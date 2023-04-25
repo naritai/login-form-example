@@ -39,12 +39,12 @@ const LoginForm = () => {
   }
 
   const handleChange = useCallback((e) => {
-    const { name, value } = e.target;
-    updateFormData(name, value);
+    const { id, value } = e.target;
+    updateFormData(id, value);
   }, []);
 
   const handleCheck = useCallback((e) => {
-    const { name, checked } = e.target;
+    const { checked, name } = e.target;
     updateFormData(name, !!checked);
   }, []);
 
@@ -55,24 +55,17 @@ const LoginForm = () => {
 
   useEffect(() => {
     setFormState(FORM_STATES.filling);
-  }, [formState.email, formState.password]);
+  }, [formData.email, formData.password]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setFormState(FORM_STATES.sending);
     console.log('formData', formData);
 
-    // setTimeout(() => {
-    //   setAuth({ user: 'Aleksandr' });
-    //   setFormData(defaultFormData);
-    //   setFormState(FORM_STATES.success);
-    //   navigate(from, { replace: true });
-    // }, 1000)
-
     try {
-      const { email, password, remember } = formState;
-      const data = JSON.stringify({ email, password, remember });
-      const response = (Math.random() * 1 > 0.5) ? SUCCESS_RESPONSE : FAILURE_RESPONSE;
+      // Stubbed HTTP request
+      // const { email, password, remember } = formData;
+      // const data = JSON.stringify({ email, password, remember });
       // const response = await fetch('', {
       //   method: 'POST',
       //   headers: { 'Content-Type': 'application/json' },
@@ -80,15 +73,23 @@ const LoginForm = () => {
       //   body: data
       // });
 
-      if (response.status === 'success') {
-        setAuth({ user: response.data.user });
-        setFormData(defaultFormData);
-        setFormState(FORM_STATES.success);
-        navigate(from, { replace: true });
-      }
+      const response = await new Promise((resolve) => {
+        setTimeout(() => {
+          const resp = (Math.random() * 1 > 0.5) ? SUCCESS_RESPONSE : FAILURE_RESPONSE;
+          resolve(resp);
+        }, 1500);
+      });
 
+      if (response.status === 'success') {
+        setFormState(FORM_STATES.success);
+        setAuth({ user: response?.data?.user });
+        setFormData(defaultFormData);
+        navigate(from, { replace: true });
+      } 
+      
       if (response?.error) {
-        setErrorMsg(response.data?.error);
+        setFormState(FORM_STATES.failure);
+        setErrorMsg(response.error?.message || '');
         errRef.current.focus();
       }
     } catch (err) {
@@ -98,19 +99,21 @@ const LoginForm = () => {
     }
   }
 
-  const showError = formState !== FORM_STATES.filling && errorMsg;
+  const showError = formState !== FORM_STATES.filling 
+    && formState !== FORM_STATES.sending && errorMsg;
+
   const disableSubmit = formState === FORM_STATES.sending;
 
   return (
     <section className="login-form__container">
       <h1 className="login-form__caption">Sign in</h1>
-      <form className="login-form" onSubmit={handleSubmit}>
+      <form className="login-form" onSubmit={handleSubmit} onTouchStart={handleSubmit}>
         <ErrorMessage showError={showError} errorMessage={errorMsg} ref={errRef} />
 
         <EmailField
           className={showError ? 'error' : ''}
           ref={emailRef}
-          value={formData.email}
+          value={formData?.email}
           onChange={handleChange}
           controlSelection={false}
           type="email"
@@ -122,7 +125,7 @@ const LoginForm = () => {
 
         <PasswordField
           className={showError ? 'error' : ''}
-          value={formData.password}
+          value={formData?.password}
           onChange={handleChange}
           controlSelection={true}
           type="password"
@@ -134,7 +137,7 @@ const LoginForm = () => {
 
         <div className="field-group-wrapper">
           <RememberMeCheckBox 
-            value={formData.remember}
+            value={formData?.remember}
             onChange={handleCheck}
             type="checkbox"
             name="remember"

@@ -4,7 +4,7 @@ import { HomePage } from '../../pages/Home';
 import { NotFoundPage } from '../../pages/NotFound';
 import { RegisterPage } from '../../pages/Register';
 import { RestorePasswordPage } from '../../pages/RestorePassword';
-import { Layout } from '../Layout';
+import { Layout, HomeLayout } from '../Layouts/';
 import { RequreAuth } from '../RequireAuth';
 
 function App() {
@@ -12,9 +12,11 @@ function App() {
     <Routes>
       <Route path="/" element={<Layout />}>
         {/* Public routes */}
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/register" element={<RegisterPage />} />
-        <Route path="/restore-password" element={<RestorePasswordPage />} />
+        <Route element={<HomeLayout />}>
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/register" element={<RegisterPage />} />
+          <Route path="/restore-password" element={<RestorePasswordPage />} />
+        </Route>
 
         {/* Private routes */}
         <Route element={<RequreAuth />}> 

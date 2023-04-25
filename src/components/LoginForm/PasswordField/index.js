@@ -7,15 +7,14 @@ const warningMessage = 'Show password as a plain text. Warning: your password wi
 
 const PasswordField = (props) => {
   const { type, value, className, ...rest } = props;
-
-  const passRef = useRef(null);
   const [showPassword, setShowPassword] = useState(false);
   const [capslockOn, setCapslockOn] = useState(false);
 
+  const passRef = useRef(null);
 
-  const togglePassVisibility = (e) => {
+  const togglePassVisibility = () => {
     setShowPassword((prev) => !prev);
-    passRef.current.focus();
+    passRef?.current?.focus();
   };
 
   const handlePassKeyDown = (e) => {
@@ -37,6 +36,7 @@ const PasswordField = (props) => {
           value={value}
           onKeyDown={handlePassKeyDown}
           maxLength={100}
+          id={type}
           {...rest}
         />
 

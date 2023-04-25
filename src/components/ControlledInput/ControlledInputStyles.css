@@ -28,3 +28,9 @@
 .error {
   outline: 2px solid #f16868;
 }
+
+@media only screen and (max-width: 768px) {
+  .default-input {
+    background: rgba(0, 0, 0, 0.15);
+  }  
+}

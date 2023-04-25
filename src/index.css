@@ -87,7 +87,6 @@ input:-webkit-autofill{
   cursor: pointer;
   font-weight: bold;
   text-transform: uppercase;
-  color: #484848;
   border: 4px solid #484848;
   border-radius: 3px;
 }

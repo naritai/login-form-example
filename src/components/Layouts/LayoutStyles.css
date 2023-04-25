@@ -6,3 +6,10 @@
 
   background-image: linear-gradient( 90deg,rgba(11, 112, 154, 0.9),rgba(177, 86, 185, 0.9),rgba(251, 142, 0, 0.3) );
 }
+
+@media only screen and (max-width: 768px) {
+  .layout {
+    align-items: flex-start;
+    background-image: linear-gradient( 180deg,rgba(11, 112, 154, 0.9),rgba(177, 86, 185, 0.9),rgba(251, 142, 0, 0.3) );
+  }
+}

@@ -3,3 +3,8 @@
   text-align: left;
   font-size: 0.8em;
 }
+
+.label {
+  display: inline-block;
+  margin-bottom: 10px;
+}
