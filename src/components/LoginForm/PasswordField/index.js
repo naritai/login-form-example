@@ -36,6 +36,7 @@ const PasswordField = (props) => {
           type={showPassword ? 'text' : type}
           value={value}
           onKeyDown={handlePassKeyDown}
+          maxLength={100}
           {...rest}
         />
 

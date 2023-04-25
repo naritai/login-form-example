@@ -1,67 +1,105 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import { PasswordField } from './PasswordField';
 import { EmailField } from './EmailField';
 import { ErrorMessage } from './ErrorMessage';
 import { RememberMeCheckBox } from './RememberMeChekbox';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { useAuth } from '../../hooks/useAuth';
+import { SUCCESS_RESPONSE, FAILURE_RESPONSE } from './stubs';
 import './LoginFormStyles.css';
 
 const FORM_STATES = {
   filling: 'filling',
   sending: 'sending',
-  sent: 'sent'
+  success: 'success',
+  failure: 'failure'
 }
 
+const defaultFormData = {
+  email: '',
+  password: '',
+  remember: false,
+  state: FORM_STATES.filling
+};
+
 const LoginForm = () => {
+  const { setAuth } = useAuth();
+  const location = useLocation();
+  const navigate = useNavigate();
+  const from = location.state?.from?.pathname || '/';
+
   const emailRef = useRef(null);
   const errRef = useRef(null);
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [remember, setRemember] = useState(false);
+  const [formData, setFormData] = useState(defaultFormData);
+  const [formState, setFormState] = useState(FORM_STATES.filling);
   const [errorMsg, setErrorMsg] = useState('');
-  const [state, setState] = useState(FORM_STATES.filling);
+
+  const updateFormData = (key, value) => {
+    setFormData((prevState) => ({ ...prevState, [key]: value }));
+  }
+
+  const handleChange = useCallback((e) => {
+    const { name, value } = e.target;
+    updateFormData(name, value);
+  }, []);
+
+  const handleCheck = useCallback((e) => {
+    const { name, checked } = e.target;
+    updateFormData(name, !!checked);
+  }, []);
+
 
   useEffect(() => {
     emailRef.current.focus();
   }, []);
 
   useEffect(() => {
-    setState(FORM_STATES.filling);
-  }, [email, password]);
+    setFormState(FORM_STATES.filling);
+  }, [formState.email, formState.password]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setState(FORM_STATES.sending);
+    setFormState(FORM_STATES.sending);
+    console.log('formData', formData);
+
+    // setTimeout(() => {
+    //   setAuth({ user: 'Aleksandr' });
+    //   setFormData(defaultFormData);
+    //   setFormState(FORM_STATES.success);
+    //   navigate(from, { replace: true });
+    // }, 1000)
 
     try {
+      const { email, password, remember } = formState;
       const data = JSON.stringify({ email, password, remember });
-      const response = await fetch('', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'credentials': 'include'
-        },
-        body: data
-      });
-      setState(FORM_STATES.sent);
+      const response = (Math.random() * 1 > 0.5) ? SUCCESS_RESPONSE : FAILURE_RESPONSE;
+      // const response = await fetch('', {
+      //   method: 'POST',
+      //   headers: { 'Content-Type': 'application/json' },
+      //   credentials: 'include',
+      //   body: data
+      // });
 
       if (response.status === 'success') {
-        // redirect
-        return;
+        setAuth({ user: response.data.user });
+        setFormData(defaultFormData);
+        setFormState(FORM_STATES.success);
+        navigate(from, { replace: true });
       }
 
-      if (response.data?.error) {
+      if (response?.error) {
         setErrorMsg(response.data?.error);
         errRef.current.focus();
       }
     } catch (err) {
-      setState(FORM_STATES.sent);
+      setFormState(FORM_STATES.failure);
       setErrorMsg(err.message);
       errRef.current.focus();
     }
   }
 
-  const showError = state !== FORM_STATES.filling && errorMsg;
-  const disableSubmit = state === FORM_STATES.sending;
+  const showError = formState !== FORM_STATES.filling && errorMsg;
+  const disableSubmit = formState === FORM_STATES.sending;
 
   return (
     <section className="login-form__container">
@@ -72,8 +110,8 @@ const LoginForm = () => {
         <EmailField
           className={showError ? 'error' : ''}
           ref={emailRef}
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          value={formData.email}
+          onChange={handleChange}
           controlSelection={false}
           type="email"
           autoCorrect="off"
@@ -84,8 +122,8 @@ const LoginForm = () => {
 
         <PasswordField
           className={showError ? 'error' : ''}
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          value={formData.password}
+          onChange={handleChange}
           controlSelection={true}
           type="password"
           required
@@ -96,11 +134,12 @@ const LoginForm = () => {
 
         <div className="field-group-wrapper">
           <RememberMeCheckBox 
-            value={remember}
-            onChange={(e) => setRemember(!!e.target.checked)}
+            value={formData.remember}
+            onChange={handleCheck}
             type="checkbox"
+            name="remember"
           />
-          <a className="forgot-password-link" href="/reset-password">Forgot password ?</a>
+          <Link className="forgot-password-link" to="/restore-password">Forgot password ?</Link>
         </div>
         
 
@@ -110,7 +149,7 @@ const LoginForm = () => {
 
         <div className="register-wrapper">
           <span>New user ?</span>
-          <a className="register-link" href="/register">Register</a>
+          <Link to="/register">Register</Link>
         </div>
       </form>
     </section>

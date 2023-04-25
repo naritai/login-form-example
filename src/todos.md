@@ -1,30 +1,17 @@
-1. DONE: Fix text selection after hide/show password - use some cross browser features
-2. Read article about recomendations: complete those that seems OK
-3. Learn why StrictMode
-4. Hooks
--- useIput
--- localStorage
-5. Replace State (push!)
-6. DONE: bufix when qutocomplete (background)
-7. built in validation https://web.dev/i18n/ru/sign-in-form-best-practices/#built-in-validation 
-
-
-MOBILE:
-1. Touch events
-2. Mobile styles
+1. built in validation https://web.dev/i18n/ru/sign-in-form-best-practices/#built-in-validation 
+2. disable dev tools fvilers/disable-dev-tools
+3. Touch events
+4. Mobile styles
 -- gradient different way
 -- overflow hidden
 
-8. Security best practices
--- disable dev tools fvilers/disable-dev-tools
--- don't save password in AuthContext (save username + AccessToken)
+4.1 Error messages
+-- Avoid vague or general error messages.
 
-Refactoring
-1. Add React Router
-2. Add React Context + redirect with React Router
-3. Hooks
--- useNavigate
--- useLocation
+
+5. Use LocalStorage when filling form ??
+
+Tools such as Garlic.js help you to persist a form’s values locally until the form is submitted. This way, users won’t lose any precious data if they accidentally close the tab or browser.
 
 
 

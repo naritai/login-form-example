@@ -11,6 +11,7 @@ const EmailField = forwardRef((props, ref) => {
         ref={ref}
         type={type}
         value={value}
+        maxLength={100}
         {...rest}
       />
     </div>
