@@ -39,6 +39,8 @@ const LoginForm = () => {
   }
 
   const handleChange = useCallback((e) => {
+    e.preventDefault();
+    e.stopPropagation();
     const { id, value } = e.target;
     updateFormData(id, value);
   }, []);

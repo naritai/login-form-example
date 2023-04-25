@@ -12,7 +12,9 @@ const PasswordField = (props) => {
 
   const passRef = useRef(null);
 
-  const togglePassVisibility = () => {
+  const togglePassVisibility = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
     setShowPassword((prev) => !prev);
     passRef?.current?.focus();
   };
