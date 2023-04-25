@@ -1,6 +1,9 @@
 import { useState, useEffect, useRef } from 'react';
-import { EyeSlash, Eye } from './icons';
-import './login.css';
+import { PasswordField } from './PasswordField';
+import { EmailField } from './EmailField';
+import { ErrorMessage } from './ErrorMessage';
+import { RememberMeCheckBox } from './RememberMeChekbox';
+import './LoginFormStyles.css';
 
 const FORM_STATES = {
   filling: 'filling',
@@ -11,10 +14,8 @@ const FORM_STATES = {
 const LoginForm = () => {
   const emailRef = useRef(null);
   const errRef = useRef(null);
-
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [showPassword, setShowPassword] = useState(false);
   const [remember, setRemember] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
   const [state, setState] = useState(FORM_STATES.filling);
@@ -26,8 +27,6 @@ const LoginForm = () => {
   useEffect(() => {
     setState(FORM_STATES.filling);
   }, [email, password]);
-
-  const toggleShowPassword = () => setShowPassword((prev) => !prev);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -62,78 +61,51 @@ const LoginForm = () => {
   }
 
   const showError = state !== FORM_STATES.filling && errorMsg;
+  const disableSubmit = state === FORM_STATES.sending;
 
   return (
     <section className="login-form__container">
       <h1 className="login-form__caption">Sign in</h1>
       <form className="login-form" onSubmit={handleSubmit}>
-        <p 
-          className={showError ? "error-message" : "offscreen"}
-          ref={errRef}
-          aria-live="assertive"
-        >
-            {errorMsg}
-        </p>
+        <ErrorMessage showError={showError} errorMessage={errorMsg} ref={errRef} />
 
-        <div className="login-form__field-group">
-          <label className="login-form__label" htmlFor="email">Email</label>
-          <input
-            className={`login-form__text-field ${showError ? 'error' : ''}`}
-            onChange={(e) => setEmail(e.target.value)}
-            value={email}
-            ref={emailRef}
-            type="email"
-            name="email"
-            autoComplete="off"
-            required
+        <EmailField
+          className={showError ? 'error' : ''}
+          ref={emailRef}
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          controlSelection={false}
+          type="email"
+          autoCorrect="off"
+          spellCheck="false"
+          required
+          autoComplete="username"
+        />
+
+        <PasswordField
+          className={showError ? 'error' : ''}
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          controlSelection={true}
+          type="password"
+          required
+          autoCorrect="off"
+          spellCheck="false"
+          autoComplete="current-password"
+        />
+
+        <div className="field-group-wrapper">
+          <RememberMeCheckBox 
+            value={remember}
+            onChange={(e) => setRemember(!!e.target.checked)}
+            type="checkbox"
           />
+          <a className="forgot-password-link" href="/reset-password">Forgot password ?</a>
         </div>
         
-        <div className="login-form__field-group">
-          <label className="login-form__label" htmlFor="password">Password</label>
-          <div className="password-field__wrapper">
-            <input
-              className={`login-form__text-field ${showError ? 'error' : ''}`}
-              onChange={(e) => setPassword(e.target.value)}
-              value={password}
-              type={showPassword ? 'text' : 'password'}
-              name="password"
-              required
-            />
-            {password && (
-              <button
-                className="toggle-password-visibility"
-                onClick={toggleShowPassword}
-                type="button"
-                tabindex="-1"
-              >
-                {showPassword ? <EyeSlash /> :  <Eye /> }
-              </button>
-            )}
-          </div>
-        </div>
 
-        <div className="login-form__field-group">
-          <div className="wrapper">
-            <input
-              className="login-form__checkbox"
-              onChange={(e) => setRemember(!!e.target.checked)}
-              value={remember}
-              type="checkbox"
-              name="remember"
-              id="remember"
-            />
-            <label className="remember-me-label" htmlFor="remember">Remember me</label>
-            <a className="forgot-password-link" href="/reset-password">Forgot password ?</a>
-          </div>
-        </div>
-
-        <button
-          className="btn submit-btn"
-          type="submit"
-          disabled={state === FORM_STATES.sending}
-        >
-          {state === FORM_STATES.sending ? 'processing...': 'Sign in'}
+        <button className="btn submit-btn" type="submit" disabled={disableSubmit}>
+          {disableSubmit ? 'processing...': 'Sign in'}
         </button>
 
         <div className="register-wrapper">

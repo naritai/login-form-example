@@ -53,6 +53,18 @@ a:active {
   outline-offset: 2px;
 }
 
+/* Set autofill bg & color when autoComplete attr is used on inputs */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    transition: background-color 5000s ease-in-out 0s;
+}
+
+input:-webkit-autofill{
+  -webkit-text-fill-color: rgb(206, 247, 250) !important;
+}
+
 .offscreen {
   position: absolute;
 
@@ -67,4 +79,27 @@ a:active {
   clip-path: inset(100%);
   clip: rect(0 0 0 0);
   overflow: hidden;
+}
+
+.btn {
+  min-height: 45px;
+  width: 100%; 
+  cursor: pointer;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #484848;
+  border: 4px solid #484848;
+  border-radius: 3px;
+}
+
+.btn[disabled] {
+  background-color: gray;
+  border-color: gray;
+  color: rgb(212, 212, 212);
+}
+
+.btn[disabled]:hover {
+  background-color: gray;
+  border-color: gray;
+  cursor: default;
 }

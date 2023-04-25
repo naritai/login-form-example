@@ -1,0 +1,41 @@
+.field-group-checkbox {
+  display: flex;
+  align-items: center;
+}
+
+.label-checkbox {
+  cursor: pointer;
+}
+
+.label:hover .default-checkbox {
+  outline: none;
+}
+
+.default-checkbox {
+  min-width: 20px;
+  min-height: 20px;
+  outline: none;
+  accent-color: rgba(11, 112, 154, 0.9);
+  margin-right: 5px;
+  cursor: pointer;
+}
+
+.default-checkbox:focus {
+  outline: 1px dashed rgb(206, 247, 250);
+  outline-offset: 2px;
+}
+
+.default-checkbox:focus:not(:focus-visible) {
+  outline: none;
+  outline-offset: 0px;
+}
+
+.default-checkbox:focus-visible {
+  outline: 1px dashed rgb(206, 247, 250);
+  outline-offset: 2px;
+}
+
+.forgot-password-link {
+  display: inline-block;
+  margin-left: auto;
+}
