@@ -107,7 +107,7 @@ const LoginForm = () => {
   return (
     <section className="login-form__container">
       <h1 className="login-form__caption">Sign in</h1>
-      <form className="login-form" onSubmit={handleSubmit} onTouchStart={handleSubmit}>
+      <form className="login-form" onSubmit={handleSubmit}>
         <ErrorMessage showError={showError} errorMessage={errorMsg} ref={errRef} />
 
         <EmailField

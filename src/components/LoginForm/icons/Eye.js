@@ -2,8 +2,8 @@ import './styles.css';
 
 export const Eye = () => (
   <svg
-    width="25"
-    height="25"
+    width="30"
+    height="30"
     fill="currentColor"
     className="bi bi-eye-fill"
     viewBox="0 0 16 16"
