@@ -19,7 +19,7 @@
   background: rgba(0, 0, 0, 0.1);
   box-shadow: 1px 1px 5px 5px rgba(0, 0, 0, 0.2);
   color: white;
-  border-radius: 3px;
+  border-radius: 20px;
 }
 
 .field-group-wrapper {
@@ -63,8 +63,6 @@
     box-shadow: none;
     background: transparent;
     font-size: 1.2em;
-
-    
   }
 
   .login-form__container {
