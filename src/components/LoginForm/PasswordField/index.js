@@ -12,7 +12,9 @@ const PasswordField = (props) => {
 
   const passRef = useRef(null);
 
-  const togglePassVisibility = () => {
+  const togglePassVisibility = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
     setShowPassword((prev) => !prev);
     passRef?.current?.focus();
   };
@@ -30,7 +32,7 @@ const PasswordField = (props) => {
 
       <div className="field-wrapper">
         <ControlledInput
-          className={`default-password-field ${className}`}
+          className={`default-password-field ${className} padding-right`}
           ref={passRef}
           type={showPassword ? 'text' : type}
           value={value}

@@ -39,6 +39,8 @@ const LoginForm = () => {
   }
 
   const handleChange = useCallback((e) => {
+    e.preventDefault();
+    e.stopPropagation();
     const { id, value } = e.target;
     updateFormData(id, value);
   }, []);
@@ -64,7 +66,7 @@ const LoginForm = () => {
 
     try {
       // Stubbed HTTP request
-      // const { email, password, remember } = formData;
+      const { email, password, remember } = formData;
       // const data = JSON.stringify({ email, password, remember });
       // const response = await fetch('', {
       //   method: 'POST',
@@ -75,8 +77,11 @@ const LoginForm = () => {
 
       const response = await new Promise((resolve) => {
         setTimeout(() => {
-          const resp = (Math.random() * 1 > 0.5) ? SUCCESS_RESPONSE : FAILURE_RESPONSE;
-          resolve(resp);
+          if (email === 'admin@gmail.com' && password === '12345') {
+            resolve(SUCCESS_RESPONSE);
+          } else {
+            resolve(FAILURE_RESPONSE)
+          }          
         }, 1500);
       });
 
@@ -107,7 +112,7 @@ const LoginForm = () => {
   return (
     <section className="login-form__container">
       <h1 className="login-form__caption">Sign in</h1>
-      <form className="login-form" onSubmit={handleSubmit} onTouchStart={handleSubmit}>
+      <form className="login-form" onSubmit={handleSubmit}>
         <ErrorMessage showError={showError} errorMessage={errorMsg} ref={errRef} />
 
         <EmailField
