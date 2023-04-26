@@ -1,6 +1,6 @@
 const SUCCESS_RESPONSE = {
   data: {
-    user: 'Aleksandr'
+    user: 'Admin'
   },
   status: 'success',
   statusCode: 200

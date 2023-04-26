@@ -66,7 +66,7 @@ const LoginForm = () => {
 
     try {
       // Stubbed HTTP request
-      // const { email, password, remember } = formData;
+      const { email, password, remember } = formData;
       // const data = JSON.stringify({ email, password, remember });
       // const response = await fetch('', {
       //   method: 'POST',
@@ -77,8 +77,11 @@ const LoginForm = () => {
 
       const response = await new Promise((resolve) => {
         setTimeout(() => {
-          const resp = (Math.random() * 1 > 0.5) ? SUCCESS_RESPONSE : FAILURE_RESPONSE;
-          resolve(resp);
+          if (email === 'admin@gmail.com' && password === '12345') {
+            resolve(SUCCESS_RESPONSE);
+          } else {
+            resolve(FAILURE_RESPONSE)
+          }          
         }, 1500);
       });
 

@@ -32,7 +32,7 @@ const PasswordField = (props) => {
 
       <div className="field-wrapper">
         <ControlledInput
-          className={`default-password-field ${className}`}
+          className={`default-password-field ${className} padding-right`}
           ref={passRef}
           type={showPassword ? 'text' : type}
           value={value}

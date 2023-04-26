@@ -18,16 +18,18 @@ const ControlledInput = forwardRef((props, ref) => {
    }
 
    return (
-      <input
-         className={`default-input ${className}`}
-         ref={resolvedRef}
-         value={value}
-         type={type}
-         name={type}
-         id={type}
-         onFocus={controlSelection ? handleCursorPosition : onFocus}
-         {...rest}
-      />
+      <div className={`default-input__wrapper ${className}`}>
+         <input
+            className="default-input"
+            ref={resolvedRef}
+            value={value}
+            type={type}
+            name={type}
+            id={type}
+            onFocus={controlSelection ? handleCursorPosition : onFocus}
+            {...rest}
+         />
+      </div>
    );
 });
 
